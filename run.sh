@@ -7,7 +7,9 @@
 #pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
 
 # Install requirements needed for the fine-tuning
-python -m pip install -r requirements.txt
+#python -m pip install -r requirements.txt
+
+clear
 
 # Run the model
 python3 src/main.py
