@@ -1,5 +1,5 @@
-import sys, logging, random, json
-
+import sys, logging, random, json, warnings
+from termcolor import colored
 import pandas as pd
 import numpy as np
 
@@ -45,6 +45,8 @@ def main():
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)  # torch.cuda
     
+    warnings.filterwarnings("ignore")
+
     # ----- OBJECTS -----
     DEVICE = utils.check_device()
     MODEL_NAME = FLAGS.model_name_hf
@@ -65,7 +67,7 @@ def main():
         json.dump(dataset_data, f)
 
     # ----- LOAD MODEL -----
-    print(f'Loading model: {MODEL_NAME}')
+    print(colored(f'Loading model: {MODEL_NAME}', 'blue'))
     model = LlamaForCausalLM.from_pretrained(
         MODEL_NAME,
         load_in_8bit=True,
@@ -73,7 +75,7 @@ def main():
         device_map="auto",
     )
 
-    print("TOKENIZER")
+    print(colored(f'\TOKENIZER ...', 'blue'))
     tokenizer = LlamaTokenizer.from_pretrained(MODEL_NAME)
     tokenizer.pad_token_id = (
         0  # unk. we want this to be different from the eos token
@@ -117,7 +119,7 @@ def main():
         tokenized_full_prompt = tokenize(full_prompt)
         return tokenized_full_prompt
 
-
+    print(colored(f'\TRAIN, VALID, TEST DATA ...', 'blue'))
     train_val = data["train"].train_test_split(
         test_size=200, shuffle=True, seed=42
     )
@@ -144,6 +146,7 @@ def main():
     TRAIN_STEPS = 10
     OUTPUT_DIR = "experiments"
     
+    print(colored(f'\LOAD PEFT MODEL ...', 'blue'))
     model = prepare_model_for_int8_training(model)
     config = LoraConfig(
         r=LORA_R,
@@ -156,6 +159,7 @@ def main():
     model = get_peft_model(model, config)
     model.print_trainable_parameters()
     
+    print(colored(f'\nTRAINING ARGUMENTS...', 'blue'))
     training_arguments = TrainingArguments(
         per_device_train_batch_size=MICRO_BATCH_SIZE,
         gradient_accumulation_steps=GRADIENT_ACCUMULATION_STEPS,
@@ -179,6 +183,7 @@ def main():
         tokenizer, pad_to_multiple_of=8, return_tensors="pt", padding=True
     )
     
+    print(colored(f'\nTRAINING ...', 'blue'))
     trainer = Trainer(
         model=model,
         train_dataset=train_data,
@@ -197,7 +202,7 @@ def main():
     model = torch.compile(model)
     
     trainer.train()
-    #model.save_pretrained(OUTPUT_DIR)
+    model.save_pretrained(OUTPUT_DIR)
     
 if __name__ == '__main__':
     #logging.info(f"Program started with arguments: {FLAGS}")
