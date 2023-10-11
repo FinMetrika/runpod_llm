@@ -48,7 +48,7 @@ def main():
     # ----- OBJECTS -----
     DEVICE = utils.check_device()
     MODEL_NAME = FLAGS.model_name_hf
-    INPUT_FILE = FLAGS.data_dir_path + FLAGS.input_file_name
+    INPUT_FILE = FLAGS.data_dir_path/FLAGS.input_file_name
     # ----- DATASET -----
     df = pd.read_csv(INPUT_FILE)
     dataset_data = [
