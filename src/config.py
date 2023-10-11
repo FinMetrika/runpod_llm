@@ -13,6 +13,7 @@ class ProjectConfig:
     model_name_hf: str="decapoda-research/llama-7b-hf" #"meta-llama/Llama-2-7b-hf"
     #proba: str='proba'
     cutoff_len: int=256
+    verbose: bool=True
 
 # from argparse import ArgumentParser
 
