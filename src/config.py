@@ -5,9 +5,9 @@ from pathlib import Path
 class ProjectConfig:
     seed: int=123
     
-    data_dir_path: Path=Path("../input/")
-    output_dir_path: Path=Path("../output/")
-    models_dir_path: Path=Path("../models/")
+    data_dir_path: Path=Path("./input/")
+    output_dir_path: Path=Path("./experiments/")
+    models_dir_path: Path=Path("./models/")
     
     input_file_name: str="BTC_Tweets_Updated.csv"
     model_name_hf: str="decapoda-research/llama-7b-hf" #"meta-llama/Llama-2-7b-hf"

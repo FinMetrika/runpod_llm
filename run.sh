@@ -9,7 +9,7 @@
 # Install requirements needed for the fine-tuning
 #python -m pip install -r requirements.txt
 
-clear
+#clear
 
 # Run the model
 python3 src/main.py
