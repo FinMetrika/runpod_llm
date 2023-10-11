@@ -5,7 +5,7 @@ import numpy as np
 
 import torch
 from datasets import load_dataset
-from tranformers import (
+from transformers import (
     LlamaForCausalLM,
     LlamaTokenizer,
     TrainingArguments,
