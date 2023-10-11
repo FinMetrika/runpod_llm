@@ -1,0 +1,12 @@
+accelerate
+bitsandbytes
+peft
+pandas
+transformers
+datasets
+torch
+scipy
+fire
+seaborn
+sentencepiece
+tensorboardX
