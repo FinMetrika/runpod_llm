@@ -8,7 +8,6 @@
 
 # Install requirements needed for the fine-tuning
 #python -m pip install -r requirements.txt
-
 #clear
 
 # Run the model
