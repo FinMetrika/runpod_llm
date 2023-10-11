@@ -75,7 +75,7 @@ def main():
         device_map="auto",
     )
 
-    print(colored(f'\TOKENIZER ...', 'blue'))
+    print(colored(f'\nTOKENIZER ...', 'blue'))
     tokenizer = LlamaTokenizer.from_pretrained(MODEL_NAME)
     tokenizer.pad_token_id = (
         0  # unk. we want this to be different from the eos token
@@ -119,7 +119,7 @@ def main():
         tokenized_full_prompt = tokenize(full_prompt)
         return tokenized_full_prompt
 
-    print(colored(f'\TRAIN, VALID, TEST DATA ...', 'blue'))
+    print(colored(f'\nTRAIN, VALID, TEST DATA ...', 'blue'))
     train_val = data["train"].train_test_split(
         test_size=200, shuffle=True, seed=42
     )
@@ -146,7 +146,7 @@ def main():
     TRAIN_STEPS = 10
     OUTPUT_DIR = "experiments"
     
-    print(colored(f'\LOAD PEFT MODEL ...', 'blue'))
+    print(colored(f'\nLOAD PEFT MODEL ...', 'blue'))
     model = prepare_model_for_int8_training(model)
     config = LoraConfig(
         r=LORA_R,

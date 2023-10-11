@@ -1,5 +1,5 @@
-import sys
-import logging
+import sys, logging
+from termcolor import colored
 import torch
 from config import ProjectConfig
 
@@ -33,6 +33,6 @@ def check_device():
         device = "cpu"
     
     if FLAGS.verbose: 
-        print(f'Using {device} device!')
+        print(colored(f'Using {device} device!', 'red'))
 
     return device
