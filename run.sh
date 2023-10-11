@@ -1,15 +1,13 @@
 # DATACLASS
-#MODEL_NAME_HR="meta-llama/Llama-2-7b-hf"
-PROBA="ema"
 
 # Upgrade pip, setuptools, wheel to the latest versions
-pip install --upgrade pip setuptools wheel
+#pip install --upgrade pip setuptools wheel
 
 # Upgrade all the installed packages
-pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
+#pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
 
 # Install requirements needed for the fine-tuning
-python -m pip install -rq requirements.txt
+python -m pip install -r requirements.txt
 
 # Run the model
 python3 src/main.py
